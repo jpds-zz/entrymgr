@@ -57,7 +57,10 @@ def delete_entry(entry_name,
     target_file = "%s/%s.md" % (directory_structure, entry_name)
 
     if not check_entry_exists(target_file):
-        raise argparse.ArgumentTypeError("File doesn't exist.")
+        raise argparse.ArgumentTypeError(
+                "Entry with filename '%s' does not exist." % target_file)
+
+    os.unlink(target_file)
 
 if __name__ == "__main__":
     # First of all: parse our arguments and verify them.
