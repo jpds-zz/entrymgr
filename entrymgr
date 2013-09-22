@@ -30,9 +30,6 @@ def create_entry(entry_name,
     #
     # Place it in a directory such as YYYY/MM/DD/entry-name.md
 
-    #specified_date = datetime.strptime(entry_date, "%Y/%m/%d")
-    #entry_date = datetime.date(specified_date)
-
     datestamp = generate_datestamp(entry_date)
     directory_structure = entry_date.strftime('%Y/%m/%d')
 
