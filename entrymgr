@@ -13,6 +13,10 @@ def ensure_directory_exists(dir_structure):
 
     return True
 
+def check_entry_exists(target_file):
+    # Check if an entry already exists or not.
+    return os.path.isfile(target_file)
+
 def create_entry(entry_name,
                  entry_date):
     #
@@ -33,9 +37,9 @@ def create_entry(entry_name,
 
     target_file = "%s/%s.md" % (directory_structure, entry_name)
 
-    if os.path.isfile(target_file):
-        raise argparse.ArgumentTypeError("Entry under %s by name '%s' exists."
-                % (directory_structure, entry_name))
+    if check_entry_exists(target_file):
+        raise argparse.ArgumentTypeError(
+                "Entry with filename '%s' exists." % target_file)
 
     entry_file = open(target_file, 'w')
 
