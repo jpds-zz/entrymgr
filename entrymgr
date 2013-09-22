@@ -46,8 +46,7 @@ def create_entry(entry_name,
     entry_file.write("%s\n" % entry_name)
 
     # Put in a heading into our file in Markdown.
-    # TODO: Find a better way to perform this.
-    for x in range(0, len(entry_name)):
+    for x in entry_name:
         entry_file.write("=")
 
 if __name__ == "__main__":
