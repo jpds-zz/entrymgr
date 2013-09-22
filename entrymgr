@@ -50,6 +50,13 @@ def create_entry(entry_name,
     for x in range(0, len(entry_name)):
         entry_file.write("=")
 
+def delete_entry(entry_name,
+                 entry_date)
+    # Delete an entry and it's the last one for that date,
+    # delete the directory.
+
+    check_entry_exists()
+
 if __name__ == "__main__":
     # First of all: parse our arguments and verify them.
     parser = argparse.ArgumentParser(
