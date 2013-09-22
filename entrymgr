@@ -3,10 +3,28 @@
 import argparse
 import os
 import sys
-import time
+
+from datetime import datetime
+
+def ensure_directory_exists(dir_structure):
+    # Make sure that the directory structure for our entry exists.
+    if not os.path.isdir(dir_structure):
+        os.makedirs(dir_structure)
+
+    return True
+
+def create_entry(name):
+    # Create a diary entry.
+    #
+    # Place it in a directory such as YYYY/MM/DD/entry-name.md
+    now = datetime.now()
+    timestamp = now.strftime('%Y-%m-%d %H:%M:%S %Z')
+    directory_structure = now.strftime('%Y/%m/%d')
+
+    ensure_directory_exists(directory_structure)
 
 if __name__ == "__main__":
-    # Parse our arguments first of all.
+    # First of all: parse our arguments and verify them.
     parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
             description="Manage diary entries with Git.")
@@ -17,7 +35,6 @@ if __name__ == "__main__":
     parser.add_argument(
             '--name',
             help="Name of entry to perform action on.",
-            dest="name"
             )
 
     args = parser.parse_args()
@@ -25,5 +42,8 @@ if __name__ == "__main__":
     if args.action not in ("create", "remove", "edit"):
         raise argparse.ArgumentTypeError("Invalid action.")
 
+    if args.name is None:
+        raise argparse.ArgumentTypeError("No entry name specified.")
+
     if args.action in "create":
-        print "Creating entry '%s'." % args.name
+        create_entry(args.name)
