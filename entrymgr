@@ -17,6 +17,12 @@ def check_entry_exists(target_file):
     # Check if an entry already exists or not.
     return os.path.isfile(target_file)
 
+def generate_datestamp(entry_date):
+    # Create a valid datetime object based on the inputted string.
+    datestamp = entry_date.strftime('%Y-%m-%d')
+
+    return datestamp
+
 def create_entry(entry_name,
                  entry_date):
     #
@@ -24,13 +30,10 @@ def create_entry(entry_name,
     #
     # Place it in a directory such as YYYY/MM/DD/entry-name.md
 
-    if entry_date is None:
-        entry_date = datetime.now()
-    else:
-        specified_date = datetime.strptime(entry_date, "%Y/%m/%d")
-        entry_date = datetime.date(specified_date)
+    #specified_date = datetime.strptime(entry_date, "%Y/%m/%d")
+    #entry_date = datetime.date(specified_date)
 
-    datestamp = entry_date.strftime('%Y-%m-%d')
+    datestamp = generate_datestamp(entry_date)
     directory_structure = entry_date.strftime('%Y/%m/%d')
 
     ensure_directory_exists(directory_structure)
@@ -51,11 +54,15 @@ def create_entry(entry_name,
         entry_file.write("=")
 
 def delete_entry(entry_name,
-                 entry_date)
+                 entry_date):
     # Delete an entry and it's the last one for that date,
     # delete the directory.
+    datestamp = generate_datestamp(entry_date)
+    directory_structure = entry_date.strftime('%Y/%m/%d')
+    target_file = "%s/%s.md" % (directory_structure, entry_name)
 
-    check_entry_exists()
+    if not check_entry_exists(target_file):
+        argparse.ArgumentTypeError("File doesn't exist.")
 
 if __name__ == "__main__":
     # First of all: parse our arguments and verify them.
@@ -73,6 +80,7 @@ if __name__ == "__main__":
     parser.add_argument(
             '--date',
             help="Date of entry to perform action on (Format: YYYY/MM/DD).",
+            default=datetime.now(),
             )
 
     args = parser.parse_args()
@@ -85,3 +93,6 @@ if __name__ == "__main__":
 
     if args.action in "create":
         create_entry(args.name, args.date)
+
+    if args.action in "remove":
+        delete_entry(args.name, args.date)
