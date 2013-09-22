@@ -51,8 +51,7 @@ def create_entry(entry_name,
 
 def delete_entry(entry_name,
                  entry_date):
-    # Delete an entry and it's the last one for that date,
-    # delete the directory.
+    # Delete an entry.
     directory_structure = entry_date.strftime('%Y/%m/%d')
     target_file = "%s/%s.md" % (directory_structure, entry_name)
 
