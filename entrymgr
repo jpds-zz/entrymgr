@@ -17,6 +17,12 @@ def check_entry_exists(target_file):
     # Check if an entry already exists or not.
     return os.path.isfile(target_file)
 
+def generate_datestamp(entry_date):
+    # Create a valid datetime object based on the inputted string.
+    datestamp = datetime.strptime(entry_date, "%Y/%m/%d")
+
+    return datestamp
+
 def create_entry(entry_name,
                  entry_date):
     #
@@ -24,13 +30,6 @@ def create_entry(entry_name,
     #
     # Place it in a directory such as YYYY/MM/DD/entry-name.md
 
-    if entry_date is None:
-        entry_date = datetime.now()
-    else:
-        specified_date = datetime.strptime(entry_date, "%Y/%m/%d")
-        entry_date = datetime.date(specified_date)
-
-    datestamp = entry_date.strftime('%Y-%m-%d')
     directory_structure = entry_date.strftime('%Y/%m/%d')
 
     ensure_directory_exists(directory_structure)
@@ -49,6 +48,18 @@ def create_entry(entry_name,
     for x in entry_name:
         entry_file.write("=")
 
+def delete_entry(entry_name,
+                 entry_date):
+    # Delete an entry.
+    directory_structure = entry_date.strftime('%Y/%m/%d')
+    target_file = "%s/%s.md" % (directory_structure, entry_name)
+
+    if not check_entry_exists(target_file):
+        raise argparse.ArgumentTypeError(
+                "Entry with filename '%s' does not exist." % target_file)
+
+    os.unlink(target_file)
+
 if __name__ == "__main__":
     # First of all: parse our arguments and verify them.
     parser = argparse.ArgumentParser(
@@ -65,6 +76,7 @@ if __name__ == "__main__":
     parser.add_argument(
             '--date',
             help="Date of entry to perform action on (Format: YYYY/MM/DD).",
+            default=datetime.now(),
             )
 
     args = parser.parse_args()
@@ -75,5 +87,13 @@ if __name__ == "__main__":
     if args.name is None:
         raise argparse.ArgumentTypeError("No entry name specified.")
 
+    date = args.date
+
+    if isinstance(args.date, str):
+        date = generate_datestamp(args.date)
+
     if args.action in "create":
-        create_entry(args.name, args.date)
+        create_entry(args.name, date)
+
+    if args.action in "remove":
+        delete_entry(args.name, date)
