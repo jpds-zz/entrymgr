@@ -23,8 +23,8 @@ def create_entry(entry_name,
     if entry_date is None:
         entry_date = datetime.now()
     else:
-        test = datetime.strptime(entry_date, "%Y/%m/%d")
-        entry_date = datetime.date(test)
+        specified_date = datetime.strptime(entry_date, "%Y/%m/%d")
+        entry_date = datetime.date(specified_date)
 
     datestamp = entry_date.strftime('%Y-%m-%d')
     directory_structure = entry_date.strftime('%Y/%m/%d')
