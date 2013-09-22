@@ -51,7 +51,7 @@ if __name__ == "__main__":
             )
     parser.add_argument(
             '--date',
-            help="Date of entry to perform action on.",
+            help="Date of entry to perform action on (Format: YYYY/MM/DD).",
             )
 
     args = parser.parse_args()
