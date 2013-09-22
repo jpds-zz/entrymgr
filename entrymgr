@@ -13,13 +13,21 @@ def ensure_directory_exists(dir_structure):
 
     return True
 
-def create_entry(name):
-    # Create a diary entry.
+def create_entry(entry_name,
+                 entry_date):
+    #
+    #   Create a diary entry.
     #
     # Place it in a directory such as YYYY/MM/DD/entry-name.md
-    now = datetime.now()
-    timestamp = now.strftime('%Y-%m-%d %H:%M:%S %Z')
-    directory_structure = now.strftime('%Y/%m/%d')
+
+    if entry_date is None:
+        entry_date = datetime.now()
+    else:
+        test = datetime.strptime(entry_date, "%Y/%m/%d")
+        entry_date = datetime.date(test)
+
+    datestamp = entry_date.strftime('%Y-%m-%d')
+    directory_structure = entry_date.strftime('%Y/%m/%d')
 
     ensure_directory_exists(directory_structure)
 
@@ -36,6 +44,10 @@ if __name__ == "__main__":
             '--name',
             help="Name of entry to perform action on.",
             )
+    parser.add_argument(
+            '--date',
+            help="Date of entry to perform action on.",
+            )
 
     args = parser.parse_args()
 
@@ -46,4 +58,4 @@ if __name__ == "__main__":
         raise argparse.ArgumentTypeError("No entry name specified.")
 
     if args.action in "create":
-        create_entry(args.name)
+        create_entry(args.name, args.date)
