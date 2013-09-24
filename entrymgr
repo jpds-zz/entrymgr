@@ -62,7 +62,8 @@ def create_entry(entry_name,
 
     ensure_directory_exists(directory_structure)
 
-    target_file = "%s/%s.md" % (directory_structure, entry_name)
+    target_file = "%s/%s.md" % (directory_structure,
+                                entry_name.replace(" ", "-").lower())
 
     if check_entry_exists(target_file):
         raise argparse.ArgumentTypeError(
@@ -70,7 +71,7 @@ def create_entry(entry_name,
 
     entry_file = open(target_file, 'w')
 
-    entry_file.write("%s\n" % entry_name)
+    entry_file.write("%s\n" % entry_name.capitalize())
 
     # Put in a heading into our file in Markdown.
     for x in entry_name:
@@ -80,7 +81,8 @@ def delete_entry(entry_name,
                  entry_date):
     # Delete an entry.
     directory_structure = entry_date.strftime('%Y/%m/%d')
-    target_file = "%s/%s.md" % (directory_structure, entry_name)
+    target_file = "%s/%s.md" % (directory_structure,
+                                entry_name.replace(" ", "-").lower())
 
     if not check_entry_exists(target_file):
         raise argparse.ArgumentTypeError(
