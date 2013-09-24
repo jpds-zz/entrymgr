@@ -71,7 +71,7 @@ def create_entry(entry_name,
 
     entry_file = open(target_file, 'w')
 
-    entry_file.write("%s\n" % entry_name.capitalize())
+    entry_file.write("%s\n" % entry_name)
 
     # Put in a heading into our file in Markdown.
     for x in entry_name:
