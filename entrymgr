@@ -97,7 +97,7 @@ if __name__ == "__main__":
             description="Manage diary entries with Git.")
     parser.add_argument(
             'action',
-            help="Action to perform on entry."
+            help="Action to perform on entry, one of: create, remove."
             )
     parser.add_argument(
             '--name',
