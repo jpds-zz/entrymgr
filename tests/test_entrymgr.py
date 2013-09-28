@@ -84,17 +84,22 @@ class EntryLifeCycleTestCase(unittest.TestCase):
         entrymgr.ensure_directory_exists("tests/fakediary")
         os.chdir("tests/fakediary")
 
+        # Ensure that we can create an entry.
         entrymgr.create_entry(self._entry_title, self._entry_date)
 
+        # Make sure contents are sane.
         entry_text = open("2013/09/23/testing-lifecycle.md", 'r').read()
 
         self.assertEqual(entry_text, self._target_result)
-
         self.assertTrue(os.path.isfile("2013/09/23/testing-lifecycle.md"))
 
+        # Can we delete the entry?
         entrymgr.delete_entry(self._entry_title, self._entry_date)
 
+        # Is the file gone?
         self.assertFalse(os.path.isfile("2013/09/23/testing-lifecycle.md"))
+
+        # Is the entry's directory still around?
         self.assertTrue(os.path.isdir("2013/09/23"))
 
     def tearDown(self):
