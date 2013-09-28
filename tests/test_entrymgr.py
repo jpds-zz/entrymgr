@@ -74,6 +74,27 @@ class GenerateDatestampTestCase(unittest.TestCase):
         date = entrymgr.generate_datestamp("2013/09/23")
         self.assertEqual(date, control)
 
+class CheckEntryExistsTestCase(unittest.TestCase):
+    _entry_title = "Checking Entry Exists"
+    _entry_date = entrymgr.generate_datestamp("2013/09/23")
+    _curdir = os.getcwd()
+
+    def runTest(self):
+        # Create a fake directory and move our tests there.
+        entrymgr.ensure_directory_exists("tests/fakediary")
+        os.chdir("tests/fakediary")
+        self.assertFalse(entrymgr.check_entry_exists(
+            "2013/09/23/checking-entry-exists.md"))
+        entrymgr.create_entry(self._entry_title, self._entry_date)
+        self.assertTrue(entrymgr.check_entry_exists(
+            "2013/09/23/checking-entry-exists.md"))
+
+    def tearDown(self):
+        # Remove the above directory.
+        os.chdir(self._curdir)
+        shutil.rmtree("tests/fakediary")
+
+
 class EntryLifeCycleTestCase(unittest.TestCase):
     # Ensure that we can create an entry.
     _entry_title = "Testing Lifecycle"
