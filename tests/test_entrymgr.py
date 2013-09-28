@@ -24,6 +24,7 @@
 #   POSSIBILITY OF SUCH DAMAGE.
 #
 
+import datetime
 import sys
 import unittest
 
@@ -35,3 +36,10 @@ class CheckLicenseTestCase(unittest.TestCase):
     # Simple dummy test to ensure that even unittest is working.
     def runTest(self):
         self.assertEqual(entrymgr.__license__, "BSD")
+
+class GenerateDatestampTestCase(unittest.TestCase):
+    # Ensure that we can generate valid datestamps for entry directories.
+    def runTest(self):
+        control = datetime.datetime(2013, 9, 23)
+        date = entrymgr.generate_datestamp("2013/09/23")
+        self.assertEqual(date, control)
