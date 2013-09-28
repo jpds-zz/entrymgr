@@ -58,10 +58,18 @@ def generate_datestamp(entry_date):
 
     return datestamp
 
+def split_datestamp_string(date_string):
+    # Helper function that's given a date in YYYY/MM/DD, and returns YYYY, MM,
+    # DD.
+
+    year, month, day = date_string.split("/")
+
+    return (year, month, day)
+
 def expunge_directory_if_empty(directory_structure):
     # Remove a directory if it has no entries.
 
-    year, month, day = directory_structure.split("/")
+    year, month, day = split_datestamp_string(directory_structure)
 
     for i in day, month, year:
         position_of_i = directory_structure.index(i) + len(i)

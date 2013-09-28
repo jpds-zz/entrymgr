@@ -177,3 +177,10 @@ class ExpungeEmptyDirectoryTestCase(unittest.TestCase):
         # Remove the above directory.
         os.chdir(self._curdir)
         os.rmdir("tests/fakediary")
+
+class SplitDatestampStringTestCase(unittest.TestCase):
+    def runTest(self):
+        date = "2019/03/30"
+        y, m, d = entrymgr.split_datestamp_string(date)
+
+        self.assertItemsEqual([y, m, d], ["2019", "03", "30"])
