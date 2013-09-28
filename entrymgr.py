@@ -151,6 +151,8 @@ def main():
 
     if args.action in "create":
         create_entry(args.name, date)
-
-    if args.action in "remove":
+    elif args.action in "remove":
         delete_entry(args.name, date)
+
+    print("%sd entry '%s' for %s." % (args.action.capitalize(),
+                                      args.name, date.strftime('%Y/%m/%d')))
