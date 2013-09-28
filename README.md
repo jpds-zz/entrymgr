@@ -27,7 +27,8 @@ Similarly, entries can be removed with the following:
     $ entrymgr remove --name "Starting off"
 
 If the entry was the sole entry for that date, the date's directory will be
-automagically removed.
+automagically removed. If that date happened to be the one day for the entry's
+month, that month will also be removed, and so on.
 
 Test suite
 ----------
