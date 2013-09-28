@@ -24,6 +24,7 @@
 #   POSSIBILITY OF SUCH DAMAGE.
 #
 
+import argparse
 import datetime
 import os
 import shutil
@@ -92,6 +93,12 @@ class EntryLifeCycleTestCase(unittest.TestCase):
 
         self.assertEqual(entry_text, self._target_result)
         self.assertTrue(os.path.isfile("2013/09/23/testing-lifecycle.md"))
+
+        # Can we create an entry with the same name and date as an existing one?
+        with self.assertRaises(argparse.ArgumentTypeError) as test_exception:
+            entrymgr.create_entry(self._entry_title, self._entry_date)
+        self.assertEqual(test_exception.exception.message,
+            "Entry with filename '2013/09/23/testing-lifecycle.md' exists.")
 
         # Can we delete the entry?
         entrymgr.delete_entry(self._entry_title, self._entry_date)
