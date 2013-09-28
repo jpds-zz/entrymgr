@@ -56,21 +56,16 @@ def generate_datestamp(entry_date):
 
     return datestamp
 
-def expunge_directory_if_empty(directory):
+def expunge_directory_if_empty(directory_structure):
     # Remove a directory if it has no entries.
-    # TODO: There must be a way to do this with a loop.
-    day = directory
-    month = directory[0:7]
-    year = directory[0:4]
 
-    if len(os.listdir(day)) is 0:
-        os.rmdir(day)
+    year, month, day = directory_structure.split("/")
 
-    if len(os.listdir(month)) is 0:
-        os.rmdir(month)
-
-    if len(os.listdir(year)) is 0:
-        os.rmdir(year)
+    for i in day, month, year:
+        position_of_i = directory_structure.index(i) + len(i)
+        target_directory = directory_structure[0:position_of_i]
+        if len(os.listdir(target_directory)) is 0:
+            os.rmdir(target_directory)
 
 def create_entry(entry_name,
                  entry_date):
