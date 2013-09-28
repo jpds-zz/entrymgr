@@ -111,7 +111,7 @@ def main():
 
     args = parser.parse_args()
 
-    if args.action not in ("create", "remove", "edit"):
+    if args.action not in ("create", "remove"):
         raise argparse.ArgumentTypeError("Invalid action.")
 
     if args.name is None:
