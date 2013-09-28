@@ -4,6 +4,9 @@ entrymgr
 entrymgr is a command-line-based journal entry management tool which can use a
 DVCS as a backend for history tracking.
 
+It can be used, for example, to maintain a text-based diary, or a journal of
+server changes.
+
 Managing entries
 ----------------
 
