@@ -40,7 +40,7 @@ import entrymgr
 class EnsureDirectoryExists(unittest.TestCase):
     # Test our entrymgr.ensure_directory_exists() function works.
     _date = "2013/09/23"
-    _target_test_directory = "tests/fakediary/"
+    _target_test_directory = "tests/fakejournal/"
 
     def runTest(self):
         # Create the directory structure based on the fake date above.
@@ -83,9 +83,9 @@ class CheckEntryExistsTestCase(unittest.TestCase):
 
     def runTest(self):
         # Create a fake directory and move our tests there.
-        entrymgr.ensure_directory_exists("tests/fakediary")
+        entrymgr.ensure_directory_exists("tests/fakejournal")
         target_filepath = "2000/01/01/checking-entry-exists.md"
-        os.chdir("tests/fakediary")
+        os.chdir("tests/fakejournal")
         self.assertFalse(entrymgr.check_entry_exists(
             target_filepath))
         entrymgr.create_entry(self._entry_title, self._entry_date)
@@ -95,7 +95,7 @@ class CheckEntryExistsTestCase(unittest.TestCase):
     def tearDown(self):
         # Remove the above directory.
         os.chdir(self._curdir)
-        shutil.rmtree("tests/fakediary")
+        shutil.rmtree("tests/fakejournal")
 
 
 class EntryLifeCycleTestCase(unittest.TestCase):
@@ -107,8 +107,8 @@ class EntryLifeCycleTestCase(unittest.TestCase):
 
     def runTest(self):
         # Create a fake directory and move our tests there.
-        entrymgr.ensure_directory_exists("tests/fakediary")
-        os.chdir("tests/fakediary")
+        entrymgr.ensure_directory_exists("tests/fakejournal")
+        os.chdir("tests/fakejournal")
 
         target_filepath = "2013/05/18/testing-lifecycle.md"
 
@@ -139,7 +139,7 @@ class EntryLifeCycleTestCase(unittest.TestCase):
     def tearDown(self):
         # Remove the above directory.
         os.chdir(self._curdir)
-        os.rmdir("tests/fakediary")
+        os.rmdir("tests/fakejournal")
 
 class ExpungeEmptyDirectoryTestCase(unittest.TestCase):
     # Test that expunging empty directories works.
@@ -150,8 +150,8 @@ class ExpungeEmptyDirectoryTestCase(unittest.TestCase):
 
     def runTest(self):
         # Create a fake directory and move our tests there.
-        entrymgr.ensure_directory_exists("tests/fakediary")
-        os.chdir("tests/fakediary")
+        entrymgr.ensure_directory_exists("tests/fakejournal")
+        os.chdir("tests/fakejournal")
 
         year, month, day = entrymgr.split_datestamp_string(self._date_as_string)
 
@@ -173,7 +173,7 @@ class ExpungeEmptyDirectoryTestCase(unittest.TestCase):
     def tearDown(self):
         # Remove the above directory.
         os.chdir(self._curdir)
-        os.rmdir("tests/fakediary")
+        os.rmdir("tests/fakejournal")
 
 class SplitDatestampStringTestCase(unittest.TestCase):
     def runTest(self):

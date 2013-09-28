@@ -1,7 +1,7 @@
 entrymgr
 ========
 
-entrymgr is a command-line based diary-entry management tool which can use a
+entrymgr is a command-line-based journal entry management tool which can use a
 DVCS as a backend for history tracking.
 
 Managing entries

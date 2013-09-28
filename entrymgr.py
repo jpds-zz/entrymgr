@@ -80,7 +80,7 @@ def expunge_directory_if_empty(directory_structure):
 def create_entry(entry_name,
                  entry_date):
     #
-    #   Create a diary entry.
+    #   Create a journal entry.
     #
     # Place it in a directory such as YYYY/MM/DD/entry-name.md
 
@@ -121,7 +121,7 @@ def main():
     # First of all: parse our arguments and verify them.
     parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
-            description="Manage diary entries with Git.")
+            description="Manage journal entries with Git.")
     parser.add_argument(
             'action',
             help="Action to perform on entry, one of: create, remove."
