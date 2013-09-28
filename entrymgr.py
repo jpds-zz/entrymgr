@@ -103,6 +103,9 @@ def create_entry(entry_name,
     for x in entry_name:
         entry_file.write("=")
 
+    # Write new line to file.
+    entry_file.write("\n")
+
 def delete_entry(entry_name,
                  entry_date):
     # Delete an entry.

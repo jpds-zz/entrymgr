@@ -102,7 +102,7 @@ class EntryLifeCycleTestCase(unittest.TestCase):
     # Ensure that we can create an entry.
     _entry_title = "Testing Lifecycle"
     _entry_date = entrymgr.generate_datestamp("2013/05/18")
-    _target_result = "Testing Lifecycle\n================="
+    _target_result = "Testing Lifecycle\n=================\n"
     _curdir = os.getcwd()
 
     def runTest(self):
