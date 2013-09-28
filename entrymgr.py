@@ -34,6 +34,11 @@ import sys
 
 from datetime import datetime
 
+def formulate_directory_structure(date):
+    # Create a directory structure based on the date.
+    structure = date.strftime('%Y/%m/%d')
+    return structure
+
 def ensure_directory_exists(dir_structure):
     # Make sure that the directory structure for our entry exists.
     if not os.path.isdir(dir_structure):
@@ -58,7 +63,7 @@ def create_entry(entry_name,
     #
     # Place it in a directory such as YYYY/MM/DD/entry-name.md
 
-    directory_structure = entry_date.strftime('%Y/%m/%d')
+    directory_structure = formulate_directory_structure(entry_date)
 
     ensure_directory_exists(directory_structure)
 
@@ -80,7 +85,7 @@ def create_entry(entry_name,
 def delete_entry(entry_name,
                  entry_date):
     # Delete an entry.
-    directory_structure = entry_date.strftime('%Y/%m/%d')
+    directory_structure = formulate_directory_structure(entry_date)
     target_file = "%s/%s.md" % (directory_structure,
                                 entry_name.replace(" ", "-").lower())
 

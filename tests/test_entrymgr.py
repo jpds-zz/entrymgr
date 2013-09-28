@@ -54,6 +54,13 @@ class EnsureDirectoryExists(unittest.TestCase):
         self.assertFalse(os.path.isdir(
             self._target_test_directory + self._date))
 
+class FormulateDateStructureTestCase(unittest.TestCase):
+    # Make sure that we create proper strings.
+    def runTest(self):
+        fake_date = datetime.datetime(2013, 9, 23)
+        function_result = entrymgr.formulate_directory_structure(fake_date)
+        self.assertEqual(function_result, "2013/09/23")
+
 class CheckLicenseTestCase(unittest.TestCase):
     # Simple dummy test to ensure that even unittest is working.
     def runTest(self):
