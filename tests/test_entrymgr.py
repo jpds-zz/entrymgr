@@ -153,25 +153,22 @@ class ExpungeEmptyDirectoryTestCase(unittest.TestCase):
         entrymgr.ensure_directory_exists("tests/fakediary")
         os.chdir("tests/fakediary")
 
-        day   = self._date_as_string
-        month = self._date_as_string[0:7]
-        year  = self._date_as_string[0:4]
+        year, month, day = entrymgr.split_datestamp_string(self._date_as_string)
 
         # Create two entries for the same date.
         for title in self._entry_titles:
             entrymgr.create_entry(title, self._entry_date)
 
-        self.assertTrue(os.listdir(day), 2)
+        for title in self._entry_titles:
+            self.assertEqual(
+                    len(os.listdir(self._date_as_string)),
+                    len(self._entry_titles) - self._entry_titles.index(title))
+            self.assertTrue(os.path.isdir(self._date_as_string))
+            entrymgr.delete_entry(title, self._entry_date)
 
-        entrymgr.delete_entry(self._entry_titles[0], self._entry_date)
-
-        self.assertTrue(os.path.isdir(day))
-
-        entrymgr.delete_entry(self._entry_titles[1], self._entry_date)
-
-        self.assertFalse(os.path.isdir(day))
-        self.assertFalse(os.path.isdir(month))
-        self.assertFalse(os.path.isdir(year))
+        self.assertFalse(os.path.isdir(self._date_as_string))
+        self.assertFalse(os.path.isdir("%s/%s" % (year, month)))
+        self.assertFalse(os.path.isdir("%s" % year))
 
     def tearDown(self):
         # Remove the above directory.
