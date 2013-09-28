@@ -58,9 +58,9 @@ class EnsureDirectoryExists(unittest.TestCase):
 class FormulateDateStructureTestCase(unittest.TestCase):
     # Make sure that we create proper strings.
     def runTest(self):
-        fake_date = datetime.datetime(2013, 9, 23)
+        fake_date = datetime.datetime(2004, 2, 12)
         function_result = entrymgr.formulate_directory_structure(fake_date)
-        self.assertEqual(function_result, "2013/09/23")
+        self.assertEqual(function_result, "2004/02/12")
 
 class CheckLicenseTestCase(unittest.TestCase):
     # Simple dummy test to ensure that even unittest is working.
@@ -70,13 +70,13 @@ class CheckLicenseTestCase(unittest.TestCase):
 class GenerateDatestampTestCase(unittest.TestCase):
     # Ensure that we can generate valid datestamps for entry directories.
     def runTest(self):
-        control = datetime.datetime(2013, 9, 23)
-        date = entrymgr.generate_datestamp("2013/09/23")
+        control = datetime.datetime(2018, 12, 25)
+        date = entrymgr.generate_datestamp("2018/12/25")
         self.assertEqual(date, control)
 
 class CheckEntryExistsTestCase(unittest.TestCase):
     _entry_title = "Checking Entry Exists"
-    _entry_date = entrymgr.generate_datestamp("2013/09/23")
+    _entry_date = entrymgr.generate_datestamp("2000/01/01")
     _curdir = os.getcwd()
 
     def runTest(self):
@@ -84,10 +84,10 @@ class CheckEntryExistsTestCase(unittest.TestCase):
         entrymgr.ensure_directory_exists("tests/fakediary")
         os.chdir("tests/fakediary")
         self.assertFalse(entrymgr.check_entry_exists(
-            "2013/09/23/checking-entry-exists.md"))
+            "2000/01/01/checking-entry-exists.md"))
         entrymgr.create_entry(self._entry_title, self._entry_date)
         self.assertTrue(entrymgr.check_entry_exists(
-            "2013/09/23/checking-entry-exists.md"))
+            "2000/01/01/checking-entry-exists.md"))
 
     def tearDown(self):
         # Remove the above directory.
@@ -98,7 +98,7 @@ class CheckEntryExistsTestCase(unittest.TestCase):
 class EntryLifeCycleTestCase(unittest.TestCase):
     # Ensure that we can create an entry.
     _entry_title = "Testing Lifecycle"
-    _entry_date = entrymgr.generate_datestamp("2013/09/23")
+    _entry_date = entrymgr.generate_datestamp("2013/05/18")
     _target_result = "Testing Lifecycle\n================="
     _curdir = os.getcwd()
 
@@ -111,25 +111,25 @@ class EntryLifeCycleTestCase(unittest.TestCase):
         entrymgr.create_entry(self._entry_title, self._entry_date)
 
         # Make sure contents are sane.
-        entry_text = open("2013/09/23/testing-lifecycle.md", 'r').read()
+        entry_text = open("2013/05/18/testing-lifecycle.md", 'r').read()
 
         self.assertEqual(entry_text, self._target_result)
-        self.assertTrue(os.path.isfile("2013/09/23/testing-lifecycle.md"))
+        self.assertTrue(os.path.isfile("2013/05/18/testing-lifecycle.md"))
 
         # Can we create an entry with the same name and date as an existing one?
         with self.assertRaises(argparse.ArgumentTypeError) as test_exception:
             entrymgr.create_entry(self._entry_title, self._entry_date)
         self.assertEqual(test_exception.exception.message,
-            "Entry with filename '2013/09/23/testing-lifecycle.md' exists.")
+            "Entry with filename '2013/05/18/testing-lifecycle.md' exists.")
 
         # Can we delete the entry?
         entrymgr.delete_entry(self._entry_title, self._entry_date)
 
         # Is the file gone?
-        self.assertFalse(os.path.isfile("2013/09/23/testing-lifecycle.md"))
+        self.assertFalse(os.path.isfile("2013/05/18/testing-lifecycle.md"))
 
         # Is the entry's directory still around?
-        self.assertTrue(os.path.isdir("2013/09/23"))
+        self.assertTrue(os.path.isdir("2013/05/18"))
 
     def tearDown(self):
         # Remove the above directory.
