@@ -79,6 +79,7 @@ class EntryLifeCycleTestCase(unittest.TestCase):
     _entry_title = "Testing Lifecycle"
     _entry_date = entrymgr.generate_datestamp("2013/09/23")
     _target_result = "Testing Lifecycle\n================="
+    _curdir = os.getcwd()
 
     def runTest(self):
         # Create a fake directory and move our tests there.
@@ -111,5 +112,5 @@ class EntryLifeCycleTestCase(unittest.TestCase):
 
     def tearDown(self):
         # Remove the above directory.
-        os.chdir("..")
-        shutil.rmtree("fakediary")
+        os.chdir(self._curdir)
+        shutil.rmtree("tests/fakediary")
