@@ -82,12 +82,13 @@ class CheckEntryExistsTestCase(unittest.TestCase):
     def runTest(self):
         # Create a fake directory and move our tests there.
         entrymgr.ensure_directory_exists("tests/fakediary")
+        target_filepath = "2000/01/01/checking-entry-exists.md"
         os.chdir("tests/fakediary")
         self.assertFalse(entrymgr.check_entry_exists(
-            "2000/01/01/checking-entry-exists.md"))
+            target_filepath))
         entrymgr.create_entry(self._entry_title, self._entry_date)
         self.assertTrue(entrymgr.check_entry_exists(
-            "2000/01/01/checking-entry-exists.md"))
+            target_filepath))
 
     def tearDown(self):
         # Remove the above directory.
@@ -107,26 +108,28 @@ class EntryLifeCycleTestCase(unittest.TestCase):
         entrymgr.ensure_directory_exists("tests/fakediary")
         os.chdir("tests/fakediary")
 
+        target_filepath = "2013/05/18/testing-lifecycle.md"
+
         # Ensure that we can create an entry.
         entrymgr.create_entry(self._entry_title, self._entry_date)
 
         # Make sure contents are sane.
-        entry_text = open("2013/05/18/testing-lifecycle.md", 'r').read()
+        entry_text = open(target_filepath, 'r').read()
 
         self.assertEqual(entry_text, self._target_result)
-        self.assertTrue(os.path.isfile("2013/05/18/testing-lifecycle.md"))
+        self.assertTrue(os.path.isfile(target_filepath))
 
         # Can we create an entry with the same name and date as an existing one?
         with self.assertRaises(argparse.ArgumentTypeError) as test_exception:
             entrymgr.create_entry(self._entry_title, self._entry_date)
         self.assertEqual(test_exception.exception.message,
-            "Entry with filename '2013/05/18/testing-lifecycle.md' exists.")
+            "Entry with filename '%s' exists." % target_filepath)
 
         # Can we delete the entry?
         entrymgr.delete_entry(self._entry_title, self._entry_date)
 
         # Is the file gone?
-        self.assertFalse(os.path.isfile("2013/05/18/testing-lifecycle.md"))
+        self.assertFalse(os.path.isfile(target_filepath))
 
         # Is the entry's directory still around?
         self.assertTrue(os.path.isdir("2013/05/18"))
