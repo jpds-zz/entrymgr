@@ -121,7 +121,7 @@ def main():
     # First of all: parse our arguments and verify them.
     parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
-            description="Manage journal entries with Git.")
+            description="Manage journal entries.")
     parser.add_argument(
             'action',
             help="Action to perform on entry, one of: create, remove."
