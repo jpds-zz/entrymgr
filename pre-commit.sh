@@ -36,5 +36,4 @@ RESULT=$?
 echo "$(date -R): Reverting Git stash..."
 git stash pop -q
 
-[ $RESULT -ne 0 ] && exit 1
-exit 0
+exit $RESULT
