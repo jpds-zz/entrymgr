@@ -25,12 +25,34 @@
 #
 
 import datetime
+import os
+import shutil
 import sys
 import unittest
 
 sys.path.append("..")
 
 import entrymgr
+
+class EnsureDirectoryExists(unittest.TestCase):
+    # Test our entrymgr.ensure_directory_exists() function works.
+    _date = "2013/09/23"
+    _target_test_directory = "tests/fakediary/"
+
+    def runTest(self):
+        # Create the directory structure based on the fake date above.
+        entrymgr.ensure_directory_exists(
+            self._target_test_directory + self._date)
+
+        self.assertTrue(os.path.isdir(
+            self._target_test_directory + self._date))
+
+    def tearDown(self):
+        # Remove the above directory.
+        shutil.rmtree(self._target_test_directory)
+
+        self.assertFalse(os.path.isdir(
+            self._target_test_directory + self._date))
 
 class CheckLicenseTestCase(unittest.TestCase):
     # Simple dummy test to ensure that even unittest is working.
