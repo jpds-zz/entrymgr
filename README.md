@@ -26,9 +26,10 @@ Similarly, entries can be removed with the following:
 
     $ entrymgr remove --name "Starting off"
 
-Upon receiving the running of the remove action, entrymgr will go through each
-of the entry's parent directory and remove them if they have no elements within
-them. In the tree example above, 28 would be removed, then 09, then 2013.
+Upon the running of the remove action, entrymgr will go through each of the
+entry's parent directory and remove them if they have no elements within
+them. In the tree example above, 28 would be removed, then 09, then 2013 as they
+have no children.
 
 Test suite
 ----------
