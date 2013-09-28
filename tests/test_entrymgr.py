@@ -1,5 +1,7 @@
 #!/usr/bin/python
 #
+#   This file contains the test suite for entrymgr.
+#
 #   Copyright (C) 2013, Jonathan Davies <jpdavs@gmail.com>
 #
 #   Redistribution and use in source and binary forms, with or without
