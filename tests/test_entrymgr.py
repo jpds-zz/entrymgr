@@ -132,9 +132,46 @@ class EntryLifeCycleTestCase(unittest.TestCase):
         self.assertFalse(os.path.isfile(target_filepath))
 
         # Is the entry's directory still around?
-        self.assertTrue(os.path.isdir("2013/05/18"))
+        self.assertFalse(os.path.isdir("2013/05/18"))
 
     def tearDown(self):
         # Remove the above directory.
         os.chdir(self._curdir)
-        shutil.rmtree("tests/fakediary")
+        os.rmdir("tests/fakediary")
+
+class ExpungeEmptyDirectoryTestCase(unittest.TestCase):
+    # Test that expunging empty directories works.
+    _entry_titles = ["Expunging test", "Post number 2"]
+    _date_as_string = "2019/03/25"
+    _entry_date = entrymgr.generate_datestamp(_date_as_string)
+    _curdir = os.getcwd()
+
+    def runTest(self):
+        # Create a fake directory and move our tests there.
+        entrymgr.ensure_directory_exists("tests/fakediary")
+        os.chdir("tests/fakediary")
+
+        day   = self._date_as_string
+        month = self._date_as_string[0:7]
+        year  = self._date_as_string[0:4]
+
+        # Create two entries for the same date.
+        for title in self._entry_titles:
+            entrymgr.create_entry(title, self._entry_date)
+
+        self.assertTrue(os.listdir(day), 2)
+
+        entrymgr.delete_entry(self._entry_titles[0], self._entry_date)
+
+        self.assertTrue(os.path.isdir(day))
+
+        entrymgr.delete_entry(self._entry_titles[1], self._entry_date)
+
+        self.assertFalse(os.path.isdir(day))
+        self.assertFalse(os.path.isdir(month))
+        self.assertFalse(os.path.isdir(year))
+
+    def tearDown(self):
+        # Remove the above directory.
+        os.chdir(self._curdir)
+        os.rmdir("tests/fakediary")
