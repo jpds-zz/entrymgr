@@ -137,7 +137,7 @@ class EntryLifeCycleTestCase(unittest.TestCase):
     def tearDown(self):
         # Remove the above directory.
         os.chdir(self._curdir)
-        shutil.rmtree("tests/fakediary")
+        os.rmdir("tests/fakediary")
 
 class ExpungeEmptyDirectoryTestCase(unittest.TestCase):
     # Test that expunging empty directories works.
@@ -170,3 +170,8 @@ class ExpungeEmptyDirectoryTestCase(unittest.TestCase):
         self.assertFalse(os.path.isdir(day))
         self.assertFalse(os.path.isdir(month))
         self.assertFalse(os.path.isdir(year))
+
+    def tearDown(self):
+        # Remove the above directory.
+        os.chdir(self._curdir)
+        os.rmdir("tests/fakediary")
