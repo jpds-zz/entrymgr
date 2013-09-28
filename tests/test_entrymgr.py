@@ -72,3 +72,26 @@ class GenerateDatestampTestCase(unittest.TestCase):
         control = datetime.datetime(2013, 9, 23)
         date = entrymgr.generate_datestamp("2013/09/23")
         self.assertEqual(date, control)
+
+class EntryLifeCycleTestCase(unittest.TestCase):
+    # Ensure that we can create an entry.
+    _entry_title = "Testing Lifecycle"
+    _entry_date = entrymgr.generate_datestamp("2013/09/23")
+    _target_result = "Testing Lifecycle\n================="
+
+    def runTest(self):
+        entrymgr.create_entry(self._entry_title, self._entry_date)
+
+        entry_text = open("2013/09/23/testing-lifecycle.md", 'r').read()
+
+        self.assertEqual(entry_text, self._target_result)
+
+        self.assertTrue(os.path.isfile("2013/09/23/testing-lifecycle.md"))
+
+        entrymgr.delete_entry(self._entry_title, self._entry_date)
+
+        self.assertFalse(os.path.isfile("2013/09/23/testing-lifecycle.md"))
+
+    def tearDown(self):
+        # Remove the above directory.
+        shutil.rmtree("2013")
