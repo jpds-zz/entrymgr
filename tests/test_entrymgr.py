@@ -80,6 +80,10 @@ class EntryLifeCycleTestCase(unittest.TestCase):
     _target_result = "Testing Lifecycle\n================="
 
     def runTest(self):
+        # Create a fake directory and move our tests there.
+        entrymgr.ensure_directory_exists("tests/fakediary")
+        os.chdir("tests/fakediary")
+
         entrymgr.create_entry(self._entry_title, self._entry_date)
 
         entry_text = open("2013/09/23/testing-lifecycle.md", 'r').read()
@@ -91,7 +95,9 @@ class EntryLifeCycleTestCase(unittest.TestCase):
         entrymgr.delete_entry(self._entry_title, self._entry_date)
 
         self.assertFalse(os.path.isfile("2013/09/23/testing-lifecycle.md"))
+        self.assertTrue(os.path.isdir("2013/09/23"))
 
     def tearDown(self):
         # Remove the above directory.
-        shutil.rmtree("2013")
+        os.chdir("..")
+        shutil.rmtree("fakediary")
