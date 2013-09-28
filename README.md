@@ -26,9 +26,9 @@ Similarly, entries can be removed with the following:
 
     $ entrymgr remove --name "Starting off"
 
-If the entry was the sole entry for that date, the date's directory will be
-automagically removed. If that date happened to be the one day for the entry's
-month, that month will also be removed, and so on.
+Upon receiving the running of the remove action, entrymgr will go through each
+of the entry's parent directory and remove them if they have no elements within
+them. In the tree example above, 28 would be removed, then 09, then 2013.
 
 Test suite
 ----------
