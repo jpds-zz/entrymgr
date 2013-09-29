@@ -81,11 +81,13 @@ class CheckEntryExistsTestCase(unittest.TestCase):
     _entry_date = entrymgr.generate_datestamp("2000/01/01")
     _curdir = os.getcwd()
 
+    def setUp(self):
+        entrymgr.ensure_directory_exists("tests/fakejournal")
+        os.chdir("tests/fakejournal")
+
     def runTest(self):
         # Create a fake directory and move our tests there.
-        entrymgr.ensure_directory_exists("tests/fakejournal")
         target_filepath = "2000/01/01/checking-entry-exists.md"
-        os.chdir("tests/fakejournal")
         self.assertFalse(entrymgr.check_entry_exists(
             target_filepath))
         entrymgr.create_entry(self._entry_title, self._entry_date)
@@ -105,11 +107,11 @@ class EntryLifeCycleTestCase(unittest.TestCase):
     _target_result = "Testing Lifecycle\n=================\n"
     _curdir = os.getcwd()
 
-    def runTest(self):
-        # Create a fake directory and move our tests there.
+    def setUp(self):
         entrymgr.ensure_directory_exists("tests/fakejournal")
         os.chdir("tests/fakejournal")
 
+    def runTest(self):
         target_filepath = "2013/05/18/testing-lifecycle.md"
 
         # Ensure that we can create an entry.
@@ -148,11 +150,11 @@ class ExpungeEmptyDirectoryTestCase(unittest.TestCase):
     _entry_date = entrymgr.generate_datestamp(_date_as_string)
     _curdir = os.getcwd()
 
-    def runTest(self):
-        # Create a fake directory and move our tests there.
+    def setUp(self):
         entrymgr.ensure_directory_exists("tests/fakejournal")
         os.chdir("tests/fakejournal")
 
+    def runTest(self):
         year, month, day = entrymgr.split_datestamp_string(self._date_as_string)
 
         # Create two entries for the same date.
