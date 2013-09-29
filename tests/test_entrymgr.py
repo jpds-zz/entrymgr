@@ -44,7 +44,7 @@ class EntryMgrFakeJournalTestCase(unittest.TestCase):
 
     def tearDown(self):
         # Remove the above directory.
-        os.chdir(self._curdir)
+        os.chdir("../..")
         shutil.rmtree("tests/fakejournal")
 
 class EnsureDirectoryExists(unittest.TestCase):
@@ -86,7 +86,6 @@ class GenerateDatestampTestCase(unittest.TestCase):
 class CheckEntryExistsTestCase(EntryMgrFakeJournalTestCase):
     _entry_title = "Checking Entry Exists"
     _entry_date = entrymgr.generate_datestamp("2000/01/01")
-    _curdir = os.getcwd()
 
     def runTest(self):
         target_filepath = "2000/01/01/checking-entry-exists.md"
@@ -101,7 +100,6 @@ class EntryLifeCycleTestCase(EntryMgrFakeJournalTestCase):
     _entry_title = "Testing Lifecycle"
     _entry_date = entrymgr.generate_datestamp("2013/05/18")
     _target_result = "Testing Lifecycle\n=================\n"
-    _curdir = os.getcwd()
 
     def runTest(self):
         target_filepath = "2013/05/18/testing-lifecycle.md"
@@ -135,7 +133,6 @@ class ExpungeEmptyDirectoryTestCase(EntryMgrFakeJournalTestCase):
     _entry_titles = ["Expunging test", "Post number 2"]
     _date_as_string = "2019/03/25"
     _entry_date = entrymgr.generate_datestamp(_date_as_string)
-    _curdir = os.getcwd()
 
     def runTest(self):
         year, month, day = entrymgr.split_datestamp_string(self._date_as_string)
