@@ -1,8 +1,8 @@
 entrymgr
 ========
 
-entrymgr is a command-line-based journal entry management tool which can use a
-DVCS as a backend for history tracking.
+entrymgr is a command-line-based journal entry management tool which can make
+use of a DVCS as a backend for history tracking and file replication.
 
 It can be used, for example, to maintain a text-based diary, or a journal of
 server changes.
@@ -42,7 +42,7 @@ directory:
 
     $ python -m unittest discover tests
 
-The test suite can also be ran before every commit by using the included
+The test suite must also be ran before every commit by using the included
 pre-commit.sh script:
 
     $ ln -s ../../pre-commit.sh .git/hooks/pre-commit
