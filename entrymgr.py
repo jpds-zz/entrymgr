@@ -31,10 +31,16 @@ __copyright__ = "Copyright 2013, Jonathan Davies"
 __license__ = "BSD"
 
 import argparse
+import gettext
 import os
 import sys
 
 from datetime import datetime
+
+# Prepare gettext.
+gettext.bindtextdomain('entrymgr', '/usr/share/locale/')
+gettext.textdomain('entrymgr')
+_ = gettext.gettext
 
 def formulate_directory_structure(date):
     # Create a directory structure based on the date.
@@ -93,7 +99,7 @@ def create_entry(entry_name,
 
     if check_entry_exists(target_file):
         raise argparse.ArgumentTypeError(
-                "Entry with filename '%s' exists." % target_file)
+                _("Entry with filename '%s' exists.") % target_file)
 
     entry_file = open(target_file, 'w')
 
@@ -115,7 +121,7 @@ def delete_entry(entry_name,
 
     if not check_entry_exists(target_file):
         raise argparse.ArgumentTypeError(
-                "Entry with filename '%s' does not exist." % target_file)
+                _("Entry with filename '%s' does not exist.") % target_file)
 
     os.unlink(target_file)
     expunge_directory_if_empty(directory_structure)
@@ -124,28 +130,28 @@ def main():
     # First of all: parse our arguments and verify them.
     parser = argparse.ArgumentParser(
             formatter_class=argparse.RawDescriptionHelpFormatter,
-            description="Manage journal entries.")
+            description=_("Manage journal entries."))
     parser.add_argument(
             'action',
-            help="Action to perform on entry, one of: create, remove."
+            help=_("Action to perform on entry, one of: create, remove.")
             )
     parser.add_argument(
             '--name',
-            help="Name of entry to perform action on.",
+            help=_("Name of entry to perform action on."),
             )
     parser.add_argument(
             '--date',
-            help="Date of entry to perform action on (Format: YYYY/MM/DD).",
+            help=_("Date of entry to perform action on (Format: YYYY/MM/DD)."),
             default=datetime.now(),
             )
 
     args = parser.parse_args()
 
     if args.action not in ("create", "remove"):
-        raise argparse.ArgumentTypeError("Invalid action.")
+        raise argparse.ArgumentTypeError(_("Invalid action."))
 
     if args.name is None:
-        raise argparse.ArgumentTypeError("No entry name specified.")
+        raise argparse.ArgumentTypeError(_("No entry name specified."))
 
     date = args.date
 
@@ -157,5 +163,5 @@ def main():
     elif args.action in "remove":
         delete_entry(args.name, date)
 
-    print("%sd entry '%s' for %s." % (args.action.capitalize(),
+    print(_("%s entry '%s' for %s done.") % (args.action.capitalize(),
                                       args.name, date.strftime('%Y/%m/%d')))

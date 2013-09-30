@@ -1,0 +1,53 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-09-30 09:39+UTC\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: entrymgr.py:102
+msgid "Entry with filename '%s' exists."
+msgstr ""
+
+#: entrymgr.py:124
+msgid "Entry with filename '%s' does not exist."
+msgstr ""
+
+#: entrymgr.py:133
+msgid "Manage journal entries."
+msgstr ""
+
+#: entrymgr.py:136
+msgid "Action to perform on entry, one of: create, remove."
+msgstr ""
+
+#: entrymgr.py:140
+msgid "Name of entry to perform action on."
+msgstr ""
+
+#: entrymgr.py:144
+msgid "Date of entry to perform action on (Format: YYYY/MM/DD)."
+msgstr ""
+
+#: entrymgr.py:151
+msgid "Invalid action."
+msgstr ""
+
+#: entrymgr.py:154
+msgid "No entry name specified."
+msgstr ""
+
+#: entrymgr.py:166
+msgid "%s entry '%s' for %s done."
+msgstr ""
+
