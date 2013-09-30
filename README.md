@@ -45,4 +45,4 @@ directory:
 The test suite must also be ran before every commit by using the included
 pre-commit.sh script:
 
-    $ ln -s ../../pre-commit.sh .git/hooks/pre-commit
+    $ ln -s ../../scripts/pre-commit.sh .git/hooks/pre-commit
