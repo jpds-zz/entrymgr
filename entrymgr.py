@@ -160,8 +160,10 @@ def main():
 
     if args.action in "create":
         create_entry(args.name, date)
+        print(_("Created entry '%s' for %s.") % (args.name,
+                                                 date.strftime('%Y/%m/%d')))
     elif args.action in "remove":
         delete_entry(args.name, date)
+        print(_("Removed entry '%s' for %s.") % (args.name,
+                                                 date.strftime('%Y/%m/%d')))
 
-    print(_("%s entry '%s' for %s done.") % (args.action.capitalize(),
-                                      args.name, date.strftime('%Y/%m/%d')))
