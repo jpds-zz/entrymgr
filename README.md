@@ -40,7 +40,7 @@ Test suite
 To run the test suite that comes with entrymgr, run this command in this
 directory:
 
-    $ python -m unittest discover tests
+    $ python -m unittest discover -v tests
 
 The test suite must also be ran before every commit by using the included
 pre-commit.sh script:
