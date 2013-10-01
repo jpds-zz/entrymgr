@@ -119,6 +119,9 @@ def create_entry(entry_name,
     # Write new line to file.
     entry_file.write("\n")
 
+    # Close opened file.
+    entry_file.close()
+
 def delete_entry(entry_name,
                  entry_date):
     # Delete an entry.
