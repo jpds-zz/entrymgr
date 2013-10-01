@@ -201,3 +201,25 @@ class SplitDatestampStringTestCase(unittest.TestCase):
         y, m, d = entrymgr.split_datestamp_string(date)
 
         self.assertItemsEqual([y, m, d], ["2019", "03", "30"])
+
+class FormulateEntryFilenameTestCase(unittest.TestCase):
+    def test_filename_always_lowercase(self):
+        test_entry_name = "Title"
+
+        result = entrymgr.formulate_entry_filename(test_entry_name)
+
+        self.assertEqual(test_entry_name.lower() + ".md", result)
+
+    def test_filename_spaces_are_dashes(self):
+        test_entry_name = "Jackie Cane"
+
+        result = entrymgr.formulate_entry_filename(test_entry_name)
+
+        self.assertEqual("jackie-cane.md", result)
+
+    def test_filename_extension_exists(self):
+        test_entry_name = "Dirty Lenses"
+
+        result = entrymgr.formulate_entry_filename(test_entry_name)
+
+        self.assertEqual(result[-3:], '.md')

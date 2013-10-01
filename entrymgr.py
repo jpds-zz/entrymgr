@@ -47,6 +47,13 @@ def formulate_directory_structure(date):
     structure = date.strftime('%Y/%m/%d')
     return structure
 
+def formulate_entry_filename(entry_title):
+    # Create the filename of the new entry.
+    entry_filename = entry_title.replace(" ", "-").lower()
+    entry_filename += ".md"
+
+    return entry_filename
+
 def ensure_directory_exists(dir_structure):
     # Make sure that the directory structure for our entry exists.
     if not os.path.isdir(dir_structure):
@@ -94,8 +101,8 @@ def create_entry(entry_name,
 
     ensure_directory_exists(directory_structure)
 
-    target_file = "%s/%s.md" % (directory_structure,
-                                entry_name.replace(" ", "-").lower())
+    target_file = "%s/%s" % (directory_structure,
+        formulate_entry_filename(entry_name))
 
     if check_entry_exists(target_file):
         raise argparse.ArgumentTypeError(
