@@ -138,7 +138,7 @@ class ExpungeEmptyDirectoryTestCase(EntryMgrFakeJournalTestCase):
     _date_as_string = "2019/03/25"
     _entry_date = entrymgr.generate_datestamp(_date_as_string)
 
-    def runTest(self):
+    def test_upward_delete_as_children_go(self):
         year, month, day = entrymgr.split_datestamp_string(self._date_as_string)
 
         # Create two entries for the same date.
@@ -155,6 +155,21 @@ class ExpungeEmptyDirectoryTestCase(EntryMgrFakeJournalTestCase):
         self.assertFalse(os.path.isdir(self._date_as_string))
         self.assertFalse(os.path.isdir("%s/%s" % (year, month)))
         self.assertFalse(os.path.isdir("%s" % year))
+
+    def test_directory_with_children_unremovable(self):
+        year, month, day = entrymgr.split_datestamp_string(self._date_as_string)
+
+        # Create two entries for the same date.
+        for title in self._entry_titles:
+            entrymgr.create_entry(title, self._entry_date)
+
+        for title in self._entry_titles:
+            if self._entry_titles.index(title) is 0:
+                self.assertEqual(len(os.listdir(self._date_as_string)), 2)
+                self.assertEqual(len(os.listdir("%s/%s" % (year, month))), 1)
+                entrymgr.expunge_directory_if_empty(self._date_as_string)
+                self.assertEqual(len(os.listdir(self._date_as_string)), 2)
+                self.assertEqual(len(os.listdir("%s/%s" % (year, month))), 1)
 
 class SplitDatestampStringTestCase(unittest.TestCase):
     def runTest(self):
