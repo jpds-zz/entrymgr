@@ -78,10 +78,14 @@ class CheckLicenseTestCase(unittest.TestCase):
 
 class GenerateDatestampTestCase(unittest.TestCase):
     # Ensure that we can generate valid datestamps for entry directories.
-    def runTest(self):
+    def test_datetime_function_return_valid(self):
         control = datetime.datetime(2018, 12, 25)
         date = entrymgr.generate_datestamp("2018/12/25")
         self.assertEqual(date, control)
+
+    def test_invalid_date_input_caught(self):
+        with self.assertRaises(ValueError) as test_exception:
+            date = entrymgr.generate_datestamp("2008/13/20")
 
 class CheckEntryExistsTestCase(EntryMgrFakeJournalTestCase):
     _entry_title = "Checking Entry Exists"
