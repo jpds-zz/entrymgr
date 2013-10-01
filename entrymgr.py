@@ -123,8 +123,8 @@ def delete_entry(entry_name,
                  entry_date):
     # Delete an entry.
     directory_structure = formulate_directory_structure(entry_date)
-    target_file = "%s/%s.md" % (directory_structure,
-                                entry_name.replace(" ", "-").lower())
+    target_file = "%s/%s" % (directory_structure,
+        formulate_entry_filename(entry_name))
 
     if not check_entry_exists(target_file):
         raise argparse.ArgumentTypeError(
