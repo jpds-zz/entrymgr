@@ -156,7 +156,11 @@ def main():
     date = args.date
 
     if isinstance(args.date, str):
-        date = generate_datestamp(args.date)
+        try:
+            date = generate_datestamp(args.date)
+        except ValueError:
+            raise argparse.ArgumentTypeError(
+                    _("Invalid date format specified."))
 
     if args.action in "create":
         create_entry(args.name, date)

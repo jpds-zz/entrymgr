@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-09-30 16:50+UTC\n"
+"POT-Creation-Date: 2013-10-01 21:50+UTC\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,10 +48,14 @@ msgid "No entry name specified."
 msgstr ""
 
 #: entrymgr.py:163
-msgid "Created entry '%s' for %s."
+msgid "Invalid date format specified."
 msgstr ""
 
 #: entrymgr.py:167
+msgid "Created entry '%s' for %s."
+msgstr ""
+
+#: entrymgr.py:171
 msgid "Removed entry '%s' for %s."
 msgstr ""
 
