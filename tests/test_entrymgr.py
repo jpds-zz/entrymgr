@@ -112,7 +112,9 @@ class EntryLifeCycleTestCase(EntryMgrFakeJournalTestCase):
         entrymgr.create_entry(self._entry_title, self._entry_date)
 
         # Make sure contents are sane.
-        entry_text = open(target_filepath, 'r').read()
+        entry_file = open(target_filepath, 'r')
+        entry_text = entry_file.read()
+        entry_file.close()
 
         self.assertEqual(entry_text, self._target_result)
         self.assertTrue(os.path.isfile(target_filepath))
