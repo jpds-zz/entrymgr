@@ -101,8 +101,8 @@ def create_entry(entry_name,
 
     ensure_directory_exists(directory_structure)
 
-    target_file = "%s/%s" % (directory_structure,
-        formulate_entry_filename(entry_name))
+    target_file = directory_structure + "/" + formulate_entry_filename(
+                                                    entry_name)
 
     if check_entry_exists(target_file):
         raise argparse.ArgumentTypeError(
@@ -123,8 +123,8 @@ def delete_entry(entry_name,
                  entry_date):
     # Delete an entry.
     directory_structure = formulate_directory_structure(entry_date)
-    target_file = "%s/%s" % (directory_structure,
-        formulate_entry_filename(entry_name))
+    target_file = directory_structure + "/" + formulate_entry_filename(
+                                                    entry_name)
 
     if not check_entry_exists(target_file):
         raise argparse.ArgumentTypeError(
