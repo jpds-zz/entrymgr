@@ -171,6 +171,30 @@ class ExpungeEmptyDirectoryTestCase(EntryMgrFakeJournalTestCase):
                 self.assertEqual(len(os.listdir(self._date_as_string)), 2)
                 self.assertEqual(len(os.listdir("%s/%s" % (year, month))), 1)
 
+    def test_different_months_removals(self):
+        _entry_dates = [entrymgr.generate_datestamp("2013/05/16"),
+                        entrymgr.generate_datestamp("2013/06/16"),
+                        entrymgr.generate_datestamp("2013/07/16")]
+
+        self._entry_titles.append("Third entry")
+
+        for title in self._entry_titles:
+            # Create three entries with the dates above.
+            entrymgr.create_entry(title,
+                _entry_dates[self._entry_titles.index(title)])
+
+        # We have three entries with three different months in one year.
+        self.assertEqual(len(os.listdir("2013")), 3)
+
+        # Remove an entry.
+        entrymgr.delete_entry(self._entry_titles[1], _entry_dates[1])
+
+        # We should have two directories under '2013'.
+        self.assertEqual(len(os.listdir("2013")), 2)
+
+        # Third entry no longer required for tests.
+        self._entry_titles.remove("Third entry")
+
 class SplitDatestampStringTestCase(unittest.TestCase):
     def runTest(self):
         date = "2019/03/30"
