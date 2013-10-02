@@ -225,3 +225,9 @@ class FormulateEntryFilenameTestCase(unittest.TestCase):
         result = entrymgr.formulate_entry_filename(test_entry_name)
 
         self.assertEqual(result[-3:], '.md')
+
+    def test_filename_entry_name_not_none(self):
+        test_entry_name = ""
+
+        with self.assertRaises(ValueError) as test_exception:
+            result = entrymgr.formulate_entry_filename(test_entry_name)

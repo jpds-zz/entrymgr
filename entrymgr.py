@@ -49,6 +49,11 @@ def formulate_directory_structure(date):
 
 def formulate_entry_filename(entry_title):
     # Create the filename of the new entry.
+
+    # Check that we actually have some data.
+    if len(entry_title) is 0:
+        raise ValueError(_("No entry name specified."))
+
     entry_filename = entry_title.replace(" ", "-").lower()
     entry_filename += ".md"
 
@@ -160,7 +165,7 @@ def main():
     if args.action not in ("create", "remove"):
         raise argparse.ArgumentTypeError(_("Invalid action."))
 
-    if args.name is None:
+    if args.name is None or len(args.name) is 0:
         raise argparse.ArgumentTypeError(_("No entry name specified."))
 
     date = args.date
