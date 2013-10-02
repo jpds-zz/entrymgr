@@ -1,7 +1,7 @@
 #!/bin/sh -e
 #
-#   generate-pot.sh - simple wrapper around pygettext to make a .pot file for
-#   entrymgr.
+#   generate-strings.sh - simple wrapper around pygettext to generate
+#   localization strings (.pot) file for entrymgr.
 #
 #   Copyright (C) 2013, Jonathan Davies <jpdavs@gmail.com>
 #
