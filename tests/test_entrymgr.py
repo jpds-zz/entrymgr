@@ -35,6 +35,8 @@ import unittest
 
 sys.path.append("..")
 
+os.environ['LANGUAGE'] = 'en'
+
 import entrymgr
 
 class EntryMgrFakeJournalTestCase(unittest.TestCase):
