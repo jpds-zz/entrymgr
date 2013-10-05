@@ -27,16 +27,16 @@
 #   POSSIBILITY OF SUCH DAMAGE.
 #
 
-PODIRECTORY="po"
+LOCALEDIRECTORY="locale"
 
 echo "$(date -R): Finding .po files..."
-POFILES="$(find $PODIRECTORY  -name '*.po')"
+LOCALEFILES="$(find $PODIRECTORY -name '*.po')"
 
-for PO in $POFILES; do
-    LANG="$(basename -s .po $PO)"
+for LOCALE in $LOCALEFILES; do
+    LANG="$(basename -s .po $LOCALE)"
     echo "$(date -R): Generating messages for $LANG..."
-    mkdir -p po/$LANG/LC_MESSAGES/
-    msgfmt $PO --output-file po/$LANG/LC_MESSAGES/entrymgr.mo
+    mkdir -p $LOCALEDIRECTORY/$LANG/LC_MESSAGES/
+    msgfmt $LOCALE --output-file $LOCALEDIRECTORY/$LANG/LC_MESSAGES/entrymgr.mo
 done
 
 echo "$(date -R): Generation completed."

@@ -28,5 +28,4 @@
 #
 
 echo "$(date -R): Creating entrymgr.pot from entrymgr.py..."
-pygettext -d entrymgr entrymgr.py
-mv entrymgr.pot po/
+pygettext --output-dir=locale -d entrymgr entrymgr.py
