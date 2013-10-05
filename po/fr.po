@@ -46,7 +46,7 @@ msgstr "Date d'entrée pour exécuter cette action sur (Format: AAAA/MM/JJ)."
 
 #: entrymgr.py:166
 msgid "Invalid action, see --help."
-msgstr "Action invalide, consultez: --help."
+msgstr "Action invalide, veuillez voir: --help."
 
 #: entrymgr.py:178
 msgid "Invalid date format specified."
