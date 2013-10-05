@@ -1,0 +1,5 @@
+entrymgr usr/bin
+entrymgr.py usr/share/pyshared
+locale/de/LC_MESSAGES/entrymgr.mo usr/share/locale/de/LC_MESSAGES
+locale/fr/LC_MESSAGES/entrymgr.mo usr/share/locale/fr/LC_MESSAGES
+locale/it/LC_MESSAGES/entrymgr.mo usr/share/locale/it/LC_MESSAGES

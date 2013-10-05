@@ -1,0 +1,22 @@
+Source: entrymgr
+Section: utils
+Priority: optional
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Jonathan Davies <jpds@ubuntu.com>
+Build-Depends: debhelper (>= 7.0.0)
+Standards-Version: 3.9.4
+Vcs-Git: https://github.com/jpds/entrymgr.git
+Vcs-Browser: https://github.com/jpds/entrymgr/
+Homepage: https://github.com/jpds/entrymgr/
+X-Python-Version: >= 2.6
+
+Package: entrymgr
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}
+Suggests: git
+Description: command-line-based journal entry management
+ entrymgr is a command-line-based journal entry management tool which can make
+ use of a DVCS as a backend for history tracking and file replication.
+ .
+ It can be used, for example, to maintain a text-based diary, or a journal of
+ server changes.

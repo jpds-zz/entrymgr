@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --with python2
+
+override_dh_auto_clean:
+	-find locale/* -type d -exec rm -rfv '{}' \;
+	find . -name \*.pyc -type f -exec rm -fv '{}' \;
+
+override_dh_auto_build:
+	scripts/generate-mo.sh
+
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+override_dh_auto_test:
+	python -m unittest discover -v tests 
+endif
