@@ -1,0 +1,61 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-10-02 07:01+UTC\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: entrymgr.py:55 entrymgr.py:169
+msgid "No entry name specified."
+msgstr "Kein Journalname eingegeben."
+
+#: entrymgr.py:114
+msgid "Entry with filename '%s' exists."
+msgstr "Eintrag mit dem Dateinamen '%s' existiert schon."
+
+#: entrymgr.py:139
+msgid "Entry with filename '%s' does not exist."
+msgstr "Eintrag mit dem Dateinamen '%s' existiert nicht."
+
+#: entrymgr.py:148
+msgid "Manage journal entries."
+msgstr "Journaleinträge verwalten."
+
+#: entrymgr.py:151
+msgid "Action to perform on entry, one of: create, remove."
+msgstr "Aktion auf der Eintrag zu ausführen, eines aus: create (erstellen), remove (entfernen)."
+
+#: entrymgr.py:155
+msgid "Name of entry to perform action on."
+msgstr "Name des Eintrags darauf ein Aktion ausführen."
+
+#: entrymgr.py:159
+msgid "Date of entry to perform action on (Format: YYYY/MM/DD)."
+msgstr "Datum des Eintrag Aktion darauf ein Aktion ausführen (Format: JJJJ/MM/TT)."
+
+#: entrymgr.py:166
+msgid "Invalid action, see --help."
+msgstr "Unbekannte Aktion, bitte sehen Sie --help."
+
+#: entrymgr.py:178
+msgid "Invalid date format specified."
+msgstr "Unbekannte Datumformat eingegeben."
+
+#: entrymgr.py:182
+msgid "Created entry '%s' for %s."
+msgstr "Eintrag '%s' auf '%s' hergestellt."
+
+#: entrymgr.py:186
+msgid "Removed entry '%s' for %s."
+msgstr "Eintrag '%s' auf '%s' entfernt."
+
