@@ -1,0 +1,35 @@
+.TH entrymgr 1 "October 5, 2013" "entrymgr"
+
+.SH NAME
+entrymgr \- command-line based journal entry management
+
+.SH SYNOPSIS
+\fBentrymgr\fP <\fIaction\fP> --name <entry name> [--date YYYY/MM/DD]
+
+.SH DESCRIPTION
+\fBentrymgr\fP is a command\-line based journal entry management tool which can
+make use of a DVCS as a backend for history tracking and file replication.
+
+It can be used, for example, to maintain a text-based diary, or a journal of
+server changes.
+
+.SH OPTIONS
+Listed below are the command line options for entrymgr:
+.TP
+.B action
+This is the action to perform on a journal entry, one of: create or remove.
+.TP
+.BR \-h ", " \-\-help
+Display a help message and exit.
+.TP
+.BR \-\-name
+Name of the journal entry to perform the above action upon.
+.TP
+.BR \-\-date 
+Date of the journal entry to perform an action upon.
+
+.SH AUTHORS
+\fBentrymgr\fP and its manpage were written by Jonathan Davies
+<jpdavs@gmail.com>.
+.PP
+Both are released under the BSD license.
