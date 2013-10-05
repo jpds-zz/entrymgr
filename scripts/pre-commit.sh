@@ -30,7 +30,7 @@ echo "$(date -R): Stashing uncommitted changes in Git branch..."
 git stash -q --keep-index
 
 echo "$(date -R): Running tests:"
-python -m unittest discover tests
+LANGUAGE=en python -m unittest discover tests
 RESULT=$?
 
 echo "$(date -R): Reverting Git stash..."
